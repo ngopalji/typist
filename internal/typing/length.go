@@ -21,11 +21,11 @@ var Lengths = []Length{Short, Medium, Long}
 func (l Length) Duration() time.Duration {
 	switch l {
 	case Short:
-		return 30 * time.Second
+		return 15 * time.Second
 	case Long:
-		return 2 * time.Minute
-	default:
 		return time.Minute
+	default:
+		return 30 * time.Second
 	}
 }
 
@@ -54,7 +54,7 @@ func (l Length) String() string {
 // Label returns the duration in compact form, e.g. "30s".
 func (l Length) Label() string { return FormatLimit(l.Duration()) }
 
-// FormatLimit renders a test duration compactly: "30s", "60s", "120s".
+// FormatLimit renders a test duration compactly: "15s", "30s", "60s".
 func FormatLimit(d time.Duration) string {
 	return strconv.Itoa(int(d.Round(time.Second)/time.Second)) + "s"
 }

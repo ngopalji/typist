@@ -117,7 +117,7 @@ func TestCannotTypePastBuffer(t *testing.T) {
 }
 
 func TestFormatLimit(t *testing.T) {
-	for l, want := range map[Length]string{Short: "30s", Medium: "60s", Long: "120s"} {
+	for l, want := range map[Length]string{Short: "15s", Medium: "30s", Long: "60s"} {
 		if got := l.Label(); got != want {
 			t.Errorf("%v label = %q, want %q", l, got, want)
 		}

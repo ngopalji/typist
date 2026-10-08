@@ -133,7 +133,7 @@ func TestFullFlow(t *testing.T) {
 	h.key("enter")
 	ts, ok := h.app.screen.(*typerScreen)
 	if !ok || ts.mode != content.Numbers || ts.length != typing.Short {
-		t.Fatalf("expected a 30s numbers test, got %T", h.app.screen)
+		t.Fatalf("expected a 15s numbers test, got %T", h.app.screen)
 	}
 	h.expectView("numbers", "clock starts when you type")
 

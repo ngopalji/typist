@@ -2,16 +2,45 @@
 
 [![ci](https://github.com/ngopalji/typist/actions/workflows/ci.yml/badge.svg)](https://github.com/ngopalji/typist/actions/workflows/ci.yml)
 
-A terminal typing trainer that records every keystroke and turns it into
-detailed stats: speed over time, accuracy, a per-key heatmap, what you type
-instead of what you meant, and your slowest key-to-key transitions.
+A little terminal typing test for the keys most typing tests skip: numbers
+and symbols. It has the usual words, letters, and prose modes too.
 
-Modes: **numbers**, **letters**, **words**, **prose**, **symbols**, each in
-30s / 60s / 120s tests.
+![typist demo](assets/demo.gif)
+
+## Why
+
+I type on an HHKB with blank keycaps. Letters were fine, but I was just
+awful with numbers and special chars. I wanted them to be as fast as
+letters.
+
+Most terminal typing tests I tried were all about words, so I made one for
+the rest of the keyboard. It was also a good excuse to finally play with
+[Bubble Tea](https://github.com/charmbracelet/bubbletea).
+
+<p align="center">
+  <img src="assets/hhkb.jpg" width="640" alt="My HHKB with blank keycaps">
+</p>
+
+## What it does
+
+- Five modes: **numbers**, **symbols**, **letters**, **words**, and
+  **prose**, as 15s, 30s, or 60s tests.
+- Symbols mode mixes random shifted keys with things you actually type in
+  code: `=>`, `!=`, `&&`, `${}`, `../`, `%s`.
+- Every keystroke is recorded, so each test ends with speed and accuracy
+  over time, a per-key heatmap, which keys you hit instead of the right
+  one, and your slowest key-to-key transitions.
+- The stats screen adds all of that up across every test you've taken, so
+  you can watch the number row catch up.
+- Everything stays on your machine in one SQLite file.
+
+![Results after a numbers test](assets/results.png)
+
+![Stats across every test](assets/stats.png)
 
 ## Install
 
-Download a binary for macOS, Linux, or Windows from the
+Grab a binary for macOS, Linux, or Windows from the
 [latest release](https://github.com/ngopalji/typist/releases/latest), or
 build it with Go 1.26+:
 
@@ -19,14 +48,11 @@ build it with Go 1.26+:
 go install github.com/ngopalji/typist/cmd/typist@latest
 ```
 
-## Usage
+## Use
 
 ```sh
-typist            # menu
-typist stats      # straight to your stats
-typist db         # print where your data lives
-typist --db PATH  # use a different database (also: $TYPIST_DB)
-typist --version
+typist          # pick a mode and go
+typist stats    # straight to your stats
 ```
 
 | screen  | keys |
@@ -36,77 +62,28 @@ typist --version
 | results | `enter` again · `b` back · `s` stats · `m` heatmap metric · `j`/`k` scroll · `q` quit |
 | stats   | `h`/`l` filter by mode · `j`/`k` scroll · `g`/`G` top/bottom · `m` heatmap metric · `b` back |
 
-`ctrl+c` quits from anywhere.
+`ctrl+c` quits from anywhere. `typist --help` lists the rest.
 
-## Where data lives
+## Your data
 
-Everything stays on your machine, in one SQLite file, resolved in this order:
+Tests are saved to `~/.local/share/typist/typist.db` (respects
+`$XDG_DATA_HOME`; `%LocalAppData%\typist` on Windows). Point it somewhere
+else with `--db PATH` or `$TYPIST_DB`, and run `typist db` to print the
+path in use.
 
-1. `--db PATH`
-2. `$TYPIST_DB`
-3. `$XDG_DATA_HOME/typist/typist.db`, else `~/.local/share/typist/typist.db`
-   (`%LocalAppData%\typist\typist.db` on Windows)
-
-The schema is versioned with `PRAGMA user_version` and migrates itself on
-startup. It stores raw keystrokes, not scores, so every stat can be
-recomputed, and new stats work on old sessions. Query it directly if you like:
+It stores raw keystrokes rather than scores, so new stats work on old tests
+and you can dig in yourself:
 
 ```sh
 sqlite3 "$(typist db)" \
   "SELECT expected, AVG(correct) FROM keystrokes WHERE kind = 0 GROUP BY expected ORDER BY 2"
 ```
 
-## Development
+## Hacking on it
 
-```sh
-make dev        # run from source against .dev/typist.db (throwaway, gitignored)
-make dev-stats  # same, straight to the stats screen
-make dev-db     # open the dev database in sqlite3
-make test       # run all tests
-make install    # install to $(go env GOPATH)/bin for real use
-```
-
-`make dev` never touches your real history. A plain `go run ./cmd/typist`
-does, because it uses the default database path.
-
-### How it's built
-
-```
-cmd/typist         CLI entrypoint: flags, subcommands, wiring
-internal/content   text generators; one endless Source per mode
-internal/typing    the test engine: cursor, keystrokes, timing (no UI)
-internal/stats     pure analytics over keystrokes: summary, timeline, per-key breakdown, history
-internal/store     SQLite persistence and migrations
-internal/config    where the database lives
-internal/ui        Bubble Tea screens: home, typer, results, stats
-internal/ui/chart  braille line charts and eighth-block bar charts
-```
-
-Dependencies only point inward: `ui` uses everything, `stats` and `store`
-use `typing`, and `typing` uses nothing but `content`'s Mode type. Each
-screen is its own small model. Screens navigate by sending messages to the
-root `App`, which does all I/O in commands, off the UI loop.
-
-**Adding a mode:** add a `Mode` and a generator in `internal/content`. It
-then appears in the menu, the stats filter, and the heatmap automatically.
-Give it a keyboard layout in `keyboardFor` if the default doesn't fit.
-
-**Adding a stat:** write it in `internal/stats` as a function of
-`typing.Result` or `[]stats.Session`, and it works on all your existing
-history.
-
-### Releasing
-
-Push a version tag and the `release` workflow runs
-[GoReleaser](https://goreleaser.com), which builds static binaries for
-macOS, Linux, and Windows (the SQLite driver is pure Go, so no cgo) and
-publishes them as a GitHub release:
-
-```sh
-git tag v0.1.0 && git push origin v0.1.0
-```
-
-To check the build locally first: `goreleaser release --snapshot --clean`.
+`make dev` runs it from source against a throwaway database, so your real
+history stays untouched. [CONTRIBUTING.md](CONTRIBUTING.md) covers how it's
+put together and how to add a mode or a stat.
 
 ## License
 
