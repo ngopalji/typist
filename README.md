@@ -30,13 +30,7 @@ the rest of the keyboard. It was also a good excuse to finally play with
   you can watch the number row catch up.
 - Everything stays on your machine in one SQLite file.
 
-![A numbers test](assets/numbers.png)
-
-![A symbols test](assets/symbols.png)
-
 ![Stats across every test](assets/stats.png)
-
-![Weakest keys, what you typed instead, and slowest pairs](assets/keys.png)
 
 ## Install
 
