@@ -5,7 +5,7 @@ import (
 	"slices"
 	"time"
 
-	"github.com/nihaar/typist/internal/typing"
+	"github.com/ngopalji/typist/internal/typing"
 )
 
 // maxLatency discards gaps longer than this from speed stats: at that point

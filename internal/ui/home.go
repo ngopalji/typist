@@ -7,9 +7,9 @@ import (
 	tea "charm.land/bubbletea/v2"
 	"charm.land/lipgloss/v2"
 
-	"github.com/nihaar/typist/internal/content"
-	"github.com/nihaar/typist/internal/stats"
-	"github.com/nihaar/typist/internal/typing"
+	"github.com/ngopalji/typist/internal/content"
+	"github.com/ngopalji/typist/internal/stats"
+	"github.com/ngopalji/typist/internal/typing"
 )
 
 // homeScreen is the menu: pick a mode with j/k and a length with h/l.

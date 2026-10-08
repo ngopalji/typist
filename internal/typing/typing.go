@@ -9,7 +9,7 @@ package typing
 import (
 	"time"
 
-	"github.com/nihaar/typist/internal/content"
+	"github.com/ngopalji/typist/internal/content"
 )
 
 // Kind distinguishes the keystrokes the engine records.

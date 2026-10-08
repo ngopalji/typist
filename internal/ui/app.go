@@ -16,9 +16,9 @@ import (
 	"charm.land/lipgloss/v2"
 	"github.com/charmbracelet/x/ansi"
 
-	"github.com/nihaar/typist/internal/content"
-	"github.com/nihaar/typist/internal/stats"
-	"github.com/nihaar/typist/internal/typing"
+	"github.com/ngopalji/typist/internal/content"
+	"github.com/ngopalji/typist/internal/stats"
+	"github.com/ngopalji/typist/internal/typing"
 )
 
 // Store is the persistence the UI needs. *store.Store satisfies it.

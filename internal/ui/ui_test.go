@@ -12,8 +12,8 @@ import (
 	"charm.land/lipgloss/v2"
 	"github.com/charmbracelet/x/ansi"
 
-	"github.com/nihaar/typist/internal/content"
-	"github.com/nihaar/typist/internal/typing"
+	"github.com/ngopalji/typist/internal/content"
+	"github.com/ngopalji/typist/internal/typing"
 )
 
 type fakeStore struct {

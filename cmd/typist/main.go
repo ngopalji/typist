@@ -12,13 +12,14 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 	"runtime/debug"
 
 	tea "charm.land/bubbletea/v2"
 
-	"github.com/nihaar/typist/internal/config"
-	"github.com/nihaar/typist/internal/store"
-	"github.com/nihaar/typist/internal/ui"
+	"github.com/ngopalji/typist/internal/config"
+	"github.com/ngopalji/typist/internal/store"
+	"github.com/ngopalji/typist/internal/ui"
 )
 
 // version is set at build time: -ldflags "-X main.version=v1.2.3".
@@ -34,6 +35,7 @@ usage:
 
 flags:
   --db PATH   database file to use (default: $%s, then %s)
+  --version   print the version
 `
 
 func main() {
@@ -46,9 +48,10 @@ func main() {
 func run(args []string) error {
 	fs := flag.NewFlagSet("typist", flag.ContinueOnError)
 	dbFlag := fs.String("db", "", "database file to use")
+	versionFlag := fs.Bool("version", false, "print the version")
 	fs.Usage = func() {
 		dir, _ := config.DataDir()
-		fmt.Fprintf(fs.Output(), usage, config.EnvDB, dir+"/typist.db")
+		fmt.Fprintf(fs.Output(), usage, config.EnvDB, filepath.Join(dir, "typist.db"))
 	}
 	// Accept flags both before and after the subcommand.
 	if err := fs.Parse(args); err != nil {
@@ -64,6 +67,9 @@ func run(args []string) error {
 		}
 	}
 
+	if *versionFlag {
+		cmd = "version"
+	}
 	switch cmd {
 	case "version":
 		fmt.Println(buildVersion())

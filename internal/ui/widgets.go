@@ -9,8 +9,8 @@ import (
 	"charm.land/bubbles/v2/help"
 	"charm.land/lipgloss/v2"
 
-	"github.com/nihaar/typist/internal/content"
-	"github.com/nihaar/typist/internal/stats"
+	"github.com/ngopalji/typist/internal/content"
+	"github.com/ngopalji/typist/internal/stats"
 )
 
 // Layout helpers.

@@ -7,7 +7,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/nihaar/typist/internal/typing"
+	"github.com/ngopalji/typist/internal/typing"
 )
 
 // charsPerWord is the standard "word" used by typing tests: five keystrokes.

@@ -3,7 +3,7 @@ package stats
 import (
 	"time"
 
-	"github.com/nihaar/typist/internal/typing"
+	"github.com/ngopalji/typist/internal/typing"
 )
 
 // Session is a test paired with its summary, computed once up front.

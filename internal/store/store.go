@@ -15,8 +15,8 @@ import (
 
 	_ "modernc.org/sqlite" // pure-Go SQLite driver; no cgo needed
 
-	"github.com/nihaar/typist/internal/content"
-	"github.com/nihaar/typist/internal/typing"
+	"github.com/ngopalji/typist/internal/content"
+	"github.com/ngopalji/typist/internal/typing"
 )
 
 // Store is a handle to the database. It is safe for concurrent use.

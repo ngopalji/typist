@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nihaar/typist/internal/content"
+	"github.com/ngopalji/typist/internal/content"
 )
 
 var t0 = time.Date(2026, 9, 28, 12, 0, 0, 0, time.UTC)

@@ -33,4 +33,4 @@ vet:
 	go vet ./...
 
 clean:
-	rm -rf bin .dev
+	rm -rf bin dist .dev

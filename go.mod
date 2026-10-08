@@ -1,4 +1,4 @@
-module github.com/nihaar/typist
+module github.com/ngopalji/typist
 
 go 1.26.0
 

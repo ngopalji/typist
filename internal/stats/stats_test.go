@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nihaar/typist/internal/content"
-	"github.com/nihaar/typist/internal/typing"
+	"github.com/ngopalji/typist/internal/content"
+	"github.com/ngopalji/typist/internal/typing"
 )
 
 // play types input against target, one key every step, and returns the

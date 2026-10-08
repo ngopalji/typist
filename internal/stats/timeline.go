@@ -4,7 +4,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/nihaar/typist/internal/typing"
+	"github.com/ngopalji/typist/internal/typing"
 )
 
 // smoothing is the trailing window speed and accuracy are measured over, so
