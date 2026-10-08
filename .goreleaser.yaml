@@ -1,0 +1,31 @@
+# Release config for GoReleaser (https://goreleaser.com).
+# Tag a version (git tag v0.1.0 && git push --tags), then run `goreleaser release`
+# (or let a GitHub Action do it). Builds are static thanks to the pure-Go SQLite driver.
+version: 2
+
+builds:
+  - main: ./cmd/typist
+    binary: typist
+    env: [CGO_ENABLED=0]
+    goos: [darwin, linux, windows]
+    goarch: [amd64, arm64]
+    flags: [-trimpath]
+    ldflags: ["-s -w -X main.version={{.Version}}"]
+
+archives:
+  - formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+
+# Uncomment after creating a github.com/<you>/homebrew-tap repo to get
+# `brew install <you>/tap/typist`.
+# brews:
+#   - repository:
+#       owner: nihaar
+#       name: homebrew-tap
+#     homepage: https://github.com/nihaar/typist
+#     description: A terminal typing trainer with detailed stats
+
+checksum:
+  name_template: checksums.txt
