@@ -17,10 +17,6 @@ Most terminal typing tests I tried were all about words, so I made one for
 the rest of the keyboard. It was also a good excuse to finally play with
 [Bubble Tea](https://github.com/charmbracelet/bubbletea).
 
-<p align="center">
-  <img src="assets/hhkb.jpg" width="640" alt="My HHKB with blank keycaps">
-</p>
-
 ## What it does
 
 - Five modes: **numbers**, **symbols**, **letters**, **words**, and
@@ -34,9 +30,13 @@ the rest of the keyboard. It was also a good excuse to finally play with
   you can watch the number row catch up.
 - Everything stays on your machine in one SQLite file.
 
-![Results after a numbers test](assets/results.png)
+![A numbers test](assets/numbers.png)
+
+![A symbols test](assets/symbols.png)
 
 ![Stats across every test](assets/stats.png)
+
+![Weakest keys, what you typed instead, and slowest pairs](assets/keys.png)
 
 ## Install
 
