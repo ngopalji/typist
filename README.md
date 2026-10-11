@@ -9,9 +9,7 @@ and symbols. It has the usual words, letters, and prose modes too.
 
 ## Why
 
-I type on an HHKB with blank keycaps. Letters were fine, but I was just
-awful with numbers and special chars. I wanted them to be as fast as
-letters.
+I'm awful at numbers and special chars, without looking down at the keyboard.
 
 Most terminal typing tests I tried were all about words, so I made one for
 the rest of the keyboard. It was also a good excuse to finally play with
